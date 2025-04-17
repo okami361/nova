@@ -267,6 +267,11 @@ class Trainer():
 
                 # Runs the forward pass with autocasting.
                 with autocast():
+                    print("Input shape:", inputs.shape)
+                    print("Min / Max :", inputs.min().item(), "/", inputs.max().item())
+                    print("Has NaNs? :", torch.isnan(inputs).any().item())
+                    print("Has infs? :", torch.isinf(inputs).any().item())
+
                     outputs = self.model(inputs)                 # forward pass
                     loss = self.loss_criterion(outputs, labels)  # compute loss
                     print(f"Loss: {loss.item():.4f}")
