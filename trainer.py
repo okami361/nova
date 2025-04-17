@@ -269,6 +269,9 @@ class Trainer():
                 with autocast():
                     outputs = self.model(inputs)                 # forward pass
                     loss = self.loss_criterion(outputs, labels)  # compute loss
+                    print(f"Loss: {loss.item():.4f}")
+                    print(f"Labels: {labels}")
+                    print(f"Outputs: {outputs}")
                 if parallel:
                     loss = loss.mean()          # list in this case
                 scaler.scale(loss).backward()   # backward() on scaled loss for scaled gradients.        
