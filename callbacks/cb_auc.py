@@ -105,6 +105,11 @@ class AUC_CB(Callbacks):
             self.best_auc_ep = self.n_epoch
             # self._best_metric_epoch = self.n_epoch
             # self._best_metric = auc_malign_val
+
+            if self.save_best and hasattr(self, 'best_model'):
+                best_model_file = f'{self.models_dir}/best_temp_best_model.pt'
+                torch.save(self.best_model.state_dict(),
+                        self.best_model_file)
         else: print()   # noop
 
         if self.use_wandb:
